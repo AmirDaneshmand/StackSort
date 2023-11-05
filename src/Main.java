@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Stack;
 
 public class Main {
@@ -15,7 +17,7 @@ public class Main {
 
         while (!stackFull.empty()){
 
-            if(stackFull.firstElement()>=stackEmpty.firstElement()){
+            if(stackFull.peek()>=stackEmpty.peek()){
                 stackEmpty.push(stackFull.pop());
 
             } else {
@@ -23,20 +25,30 @@ public class Main {
                 int turn = 0;
                 temp = stackFull.pop();
 
-                while (temp < stackEmpty.firstElement()){
+                while (temp < stackEmpty.peek()){
                     stackFull.push(stackEmpty.pop());
                     turn++;
                 }
-
+                stackEmpty.push(temp);
                 for (int i = 0; i < turn; i++) {
                     stackEmpty.push(stackFull.pop());
                 }
 
-                stackEmpty.push(temp);
+
             }
         }
     }
 
 
+    public static void main(String[] args) {
+        Main testMain = new Main();
 
+        testMain.stackFull.push(8);
+        testMain.stackFull.push(3);
+        testMain.stackFull.push(9);
+        testMain.stackFull.push(1);
+        System.out.println(testMain.stackFull);
+        testMain.stackSorting();
+        System.out.println(testMain.stackEmpty);
+    }
 }
